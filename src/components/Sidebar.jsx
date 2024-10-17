@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom'
+import PeopleIcon from '@mui/icons-material/People'; 
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import HomeIcon from '@mui/icons-material/Home';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const Sidebar = () => {
   const [isPatientOpen, setIsPatientOpen] = useState(false);
@@ -18,9 +24,21 @@ const Sidebar = () => {
       <nav>
         <ul className="space-y-2">
           <NavLink to="/" end>
-            <li className="hover:bg-gray-700 p-2 rounded">Home</li>
+          <li className="hover:bg-gray-700 p-2 rounded flex items-center">
+              <HomeIcon className="mr-2" />
+              Home
+            </li>
           </NavLink>
-          <li className="hover:bg-gray-700 p-2 rounded" onClick={togglePatientSection}>Patient</li>
+          <li
+            className="hover:bg-gray-700 p-2 rounded flex items-center justify-between cursor-pointer"
+            onClick={togglePatientSection}
+          >
+            <div className="flex items-center">
+              <PeopleIcon className="mr-2" />
+              Patient
+            </div>
+            {isPatientOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </li>
           {isPatientOpen && (
             <ul className="ml-4 space-y-2">
               <NavLink to="/add-patient">
@@ -31,8 +49,15 @@ const Sidebar = () => {
               </NavLink>
             </ul>
           )}
-          <li className="hover:bg-gray-700 p-2 rounded" onClick={togglePriorSection}>
-            Prior
+         <li
+            className="hover:bg-gray-700 p-2 rounded flex items-center justify-between cursor-pointer"
+            onClick={togglePriorSection}
+          >
+            <div className="flex items-center">
+              <AssignmentIcon className="mr-2" />
+              Prior Authorization
+            </div>
+            {isPriorOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </li>
           {isPriorOpen && (
             <ul className="ml-4 space-y-2">
@@ -44,8 +69,11 @@ const Sidebar = () => {
               </NavLink>
             </ul>
           )}
-          <NavLink to="/settings"> {/* Add this if you have a Settings page */}
-            <li className="hover:bg-gray-700 p-2 rounded">Settings</li>
+          <NavLink to="/settings"> 
+          <li className="hover:bg-gray-700 p-2 rounded flex items-center">
+              <SettingsIcon className="mr-2" />
+              Settings
+            </li>
           </NavLink>
 
         </ul>

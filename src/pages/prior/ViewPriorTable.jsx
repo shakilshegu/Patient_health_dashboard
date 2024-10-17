@@ -1,106 +1,75 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllPrior } from "../../Services/PatientService";
 import { useState } from "react";
-import DataTable from "react-data-table-component";
+import {
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TextField, CircularProgress
+} from "@mui/material";
 
 const ViewPriorTable = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ['priorAuthorization'],
         queryFn: getAllPrior
-    }
-    );
-    console.log(data, "hello");
-
+    });
     const [searchTerm, setSearchTerm] = useState('');
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading data: {error.message}</div>;
+
+    if (isLoading) return <CircularProgress />;
+    if (error) return <Typography color="error">Error loading data: {error.message}</Typography>;
 
     // Filter data based on search term
     const filteredData = data.filter(item =>
         item.patientId.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    const columns = [
-        {
-            name: "ID",
-            selector: (row, index) => index + 1,
-            sortable: true,
-            width: "70px",
-        },
-        {
-            name: "Patient Name",
-            selector: (row) => row.patientId.name,
-            sortable: true,
-            width: "170px",
-        },
-        {
-            name: "Age",
-            selector: (row) => row.patientId.age,
-            sortable: true,
-            width: "100px",
-        },
-        {
-            name: "Treatment Type",
-            selector: (row) => row.treatmentType,
-            sortable: true,
-        },
-        {
-            name: "Insurance Plan",
-            selector: (row) => row.insurancePlan,
-            sortable: true,
-        },
-        {
-            name: "Date of Service",
-            selector: (row) => new Date(row.dateOfService).toLocaleDateString(),
-            sortable: true,
-        },
-        {
-            name: "Diagnosis Code",
-            selector: (row) => row.diagnosisCode,
-            sortable: true,
-        },
-        {
-            name: "Medication",
-            selector: (row) => row.medication,
-            sortable: true,
-        },
-        {
-            name: "Status",
-            selector: (row) => (
-                <span style={{ color: row.status === 'Pending' ? 'red' : 'black' }}>
-                    {row.status}
-                </span>
-            ),
-            sortable: true,
-        },
-        {
-            name: "Provider Notes",
-            selector: (row) => row.providerNotes,
-        },
-        {
-            name: "Insurance Company",
-            selector: (row) => row.insuranceCompany,
-        },
-    ];
+
     return (
-        <div>
-            <h2 className="font-semibold">Prior Authorization Data</h2>
-            <input
-                type="text"
-                placeholder="Search by patient name"
-                className="border rounded p-1 mt-1"
+        <TableContainer component={Paper}>
+            <Typography variant="h6" component="div" style={{ padding: "16px" }}>
+                Prior Authorization Data
+            </Typography>
+            <TextField
+                label="Search by patient name"
+                variant="outlined"
+                size="small"
+                fullWidth
+                style={{ marginBottom: "16px", padding: "0 16px" }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <DataTable
-                columns={columns}
-                data={filteredData}
-                pagination
-                highlightOnHover
-                striped
-                responsive
-            />
-        </div>
-    )
-}
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        {[
+                            "ID", "Patient Name", "Age", "Treatment Type", "Insurance Plan",
+                            "Date of Service", "Diagnosis Code", "Medication", "Status",
+                            "Provider Notes", "Insurance Company"
+                        ].map((header) => (
+                            <TableCell key={header} style={{ fontWeight: "bold", color: "black" }}>
+                                {header}
+                            </TableCell>
+                        ))}
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {filteredData.map((row, index) => (
+                        <TableRow key={index}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>{row.patientId.name}</TableCell>
+                            <TableCell>{row.patientId.age}</TableCell>
+                            <TableCell>{row.treatmentType}</TableCell>
+                            <TableCell>{row.insurancePlan}</TableCell>
+                            <TableCell>{new Date(row.dateOfService).toLocaleDateString()}</TableCell>
+                            <TableCell>{row.diagnosisCode}</TableCell>
+                            <TableCell>{row.medication}</TableCell>
+                            <TableCell style={{ color: row.status === 'Pending' ? 'red' : 'black' }}>
+                                {row.status}
+                            </TableCell>
+                            <TableCell>{row.providerNotes}</TableCell>
+                            <TableCell>{row.insuranceCompany}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
+};
 
-export default ViewPriorTable
+export default ViewPriorTable;
