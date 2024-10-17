@@ -25,15 +25,16 @@ const ViewPriorTable = () => {
             <Typography variant="h6" component="div" style={{ padding: "16px" }}>
                 Prior Authorization Data
             </Typography>
-            <TextField
-                label="Search by patient name"
-                variant="outlined"
-                size="small"
-                fullWidth
-                style={{ marginBottom: "16px", padding: "0 16px" }}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <div className="flex justify-end">
+                <TextField
+                    label="Search"
+                    variant="outlined"
+                    size="small"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+
+            </div>
             <Table>
                 <TableHead>
                     <TableRow>

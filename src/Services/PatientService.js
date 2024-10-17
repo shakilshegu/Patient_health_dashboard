@@ -44,4 +44,12 @@ export const getAllPrior = async () =>{
     }
 }
 
+export const addPatientHealthRecord = async (id,formData) =>{
+    try {
+        const response = await axiosInstance.get(`api/patients/:id${id}/health-records`,formData);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || 'Failed to add Health records'); 
+    }
+} 
 
