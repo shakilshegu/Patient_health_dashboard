@@ -39,7 +39,7 @@ const Sidebar = () => {
               <NavLink to="/add-prior">
                 <li className="hover:bg-gray-600 p-2 rounded">Add Prior</li>
               </NavLink>
-              <NavLink to="/view-prior">
+              <NavLink to="/get-prior">
                 <li className="hover:bg-gray-600 p-2 rounded">View Prior</li>
               </NavLink>
             </ul>

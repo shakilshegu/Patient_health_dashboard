@@ -26,4 +26,22 @@ export const singlePatients = async (id) =>{
     }
 }
 
+export const addPrior = async (formData) =>{
+    try {
+        const response = await axiosInstance.post('api/patients/prior/create',formData);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || 'Failed to add Parir');  
+    }
+}
+
+export const getAllPrior = async () =>{
+    try {
+        const response = await axiosInstance.get('api/patients/prior/all');
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || 'Failed to add Parir');  
+    }
+}
+
 

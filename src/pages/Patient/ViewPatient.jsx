@@ -22,18 +22,16 @@ const ViewPatient = () => {
   const [open, setOpen] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
 
-  // Handle view click to open modal
   const handleViewClick = (patient) => {
-    setSelectedPatient(patient); // Set the selected patient
-    setOpen(true); // Open the modal
+    setSelectedPatient(patient); 
+    setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setSelectedPatient(null); // Reset selected patient when closing
+    setSelectedPatient(null);
   };
 
-  // Handle loading and error states
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 

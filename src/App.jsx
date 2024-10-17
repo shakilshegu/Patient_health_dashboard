@@ -5,6 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Health from "./pages/Health";
 import AddPatientForm from "./pages/Patient/AddPatientForm"
 import { Toaster } from 'react-hot-toast';
+import AddPriorForm from "./pages/prior/AddPriorFrom";
+import ViewPriorTable from "./pages/prior/ViewPriorTable";
 
 function App() {
   return (
@@ -33,6 +35,22 @@ function App() {
             element={
               <MainLayout>
                 <AddPatientForm/>
+              </MainLayout>
+            }
+          />
+            <Route
+            path="/add-prior"
+            element={
+              <MainLayout>
+                <AddPriorForm/>
+              </MainLayout>
+            }
+          />
+           <Route
+            path="/get-prior"
+            element={
+              <MainLayout>
+                <ViewPriorTable/>
               </MainLayout>
             }
           />
