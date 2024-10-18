@@ -63,7 +63,7 @@ const AddPriorForm = () => {
                         validationSchema={validationSchema}
                         onSubmit={(values, { resetForm }) => {
                             mutation.mutate(values);
-                            resetForm(); // Reset the form after successful submission
+                            resetForm();
                         }}
                     >
 
