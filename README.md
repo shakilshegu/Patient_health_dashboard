@@ -1,8 +1,31 @@
-# React + Vite
+Here's the README content in a single block for easy copying:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```markdown
+# Project Name
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow the instructions below to set up and run the project on your local machine.
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Set Environment Variables
+Create a `.env` file in the root directory and add the required environment variables. Refer to `.env.example` if available.
+
+### 4. Run the Development Server
+```bash
+npm run dev
+```
+
+The application should now be running on `http://localhost:3000` (or your specified port).
+```
+
+Just replace `<repository-url>` with your actual Git repository URL.
